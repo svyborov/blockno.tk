@@ -11,7 +11,7 @@
 				return JSON.parse(lists)
 			}
 		}
-	}
+	};
 		
 	const createLists = () => {
 		const { subscribe, update, set } = writable([]);
@@ -20,7 +20,7 @@
 			if (index !== -1) {
 				return array.splice(index, 1)[0];
 			}
-		}
+		};
 		
 		return {
 			subscribe,
@@ -37,7 +37,7 @@
 			},
       setLists: lists => set(lists)
 		}
-	}
+	};
 	
 	const lists = createLists();
 	
@@ -52,7 +52,7 @@
     if (l) {
       lists.setLists(l);
     }
-	})
+	});
 </script>
 
 <style>
