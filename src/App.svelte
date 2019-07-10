@@ -20,12 +20,12 @@
 		return {
 			subscribe,
 			addList: list => {
-        update(lists => [...lists, list])
+        update(lists => [...lists, list]);
         ls.saveLists(get(lists))
       },
 			updateList: (i, list) => { 
 				update(lists => {
-					lists[i] = {...lists[i], ...list}
+					lists[i] = {...lists[i], ...list};
 					return lists
         })
         ls.saveLists(get(lists))
@@ -38,12 +38,12 @@
 	
 	let inputVal = '';
 	const createList = () => {
-    lists.addList({ name: inputVal, items: [] })
+    lists.addList({ name: inputVal, items: [] });
 		inputVal = '';
 	};
 	
 	onMount(() => {
-    const l = ls.getLists()
+    const l = ls.getLists();
     if (l) {
       lists.setLists(l);
     }
