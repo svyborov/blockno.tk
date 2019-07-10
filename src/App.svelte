@@ -1,7 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 	import { writable, get } from 'svelte/store';
-	import TodoList from './TodoList.svelte'
+	import TodoList from './TodoList.svelte';
+	import { remove } from './utils'
 	
 	const ls = {
 		saveLists: lists => localStorage.setItem('lists', JSON.stringify(lists)),
@@ -15,12 +16,6 @@
 		
 	const createLists = () => {
 		const { subscribe, update, set } = writable([]);
-		
-		const remove = (array, index) => {
-			if (index !== -1) {
-				return array.splice(index, 1)[0];
-			}
-		};
 		
 		return {
 			subscribe,
