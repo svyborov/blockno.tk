@@ -15,18 +15,18 @@
 </li>
 
 <script>
-	import { remove } from './utils'
+	import { remove } from './utils';
 	let inputValue = '';
 	
 	const addItem = () => {
-		updateList(listId, { items: [...items, inputValue] })
+		updateList(listId, { items: [...items, inputValue] });
 		inputValue = '';
-	}
+	};
 
 	const removeItem = (i) => {
 		remove(items, i);
-		updateList(listId, { items: items })
-	}
+		updateList(listId, { items: items });
+	};
 	
 	export let name = '';
 	export let items = [];
