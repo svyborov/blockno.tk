@@ -1,27 +1,32 @@
-<li class='list'>
-	<h4 class='list__name'>{name}</h4>
-	<form on:submit|preventDefault={addItem}>
-		<input type='text' class='list__item-input' placeholder="new item" bind:value={inputValue} >	
-	</form>
-	<ul class="list__item-list">
-		{#each items as item, i}
-			<li class='list__item'>
-        <div class="input-group mb-3">
+<div class="card">
+  <div class="card-header">
+    {name}
+  </div>
+  <div class="card-body p-0">
+    <form on:submit|preventDefault={addItem}>
+      <input type="text" class="form-control border-0 m-0" aria-label="Text input with checkbox" bind:value={inputValue}>
+    </form>
+  </div>
+  <ul class="list-group list-group-flush">
+    {#each items as item, i}
+      <li class="list-group-item p-0 rounded-0">
+        <div class="input-group m-0">
           <div class="input-group-prepend">
-            <div class="input-group-text">
+            <div class="input-group-text border-0">
               <input type="checkbox" aria-label="Checkbox for following text input">
             </div>
           </div>
-          <input type="text" class="form-control" aria-label="Text input with checkbox" bind:value={item} on:keydown={() => editItem(i, item)}>
+          <input type="text" class="form-control border-0 m-0" aria-label="Text input with checkbox" bind:value={item} on:keydown={() => editItem(i, item)}>
           <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2" on:click={() => removeItem(i)}>x</button>
-            </div>
+            <button class="btn btn-outline-secondary border-0" type="button" id="button-addon2" on:click={() => removeItem(i)}>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </div>
-
-			</li>
-		{/each}
-	</ul>
-</li>
+      </li>
+    {/each}
+  </ul>
+</div>
 
 <script>
 	import { remove } from './utils';
@@ -49,20 +54,4 @@
 </script>
 
 <style>
-	.list {
-		list-style-type: none;
-		padding: 10px;
-	}
-	
-	.list__name {
-		text-align: center;
-	}
-	
-	.list__item {
-		list-style-type: none;
-	}
-
-	.list__item-list {
-		padding: 0;
-	}
 </style>

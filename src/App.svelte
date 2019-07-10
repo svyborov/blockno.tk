@@ -50,14 +50,6 @@
 	});
 </script>
 
-<style>
-	.lists {
-		display: flex;
-		border: 1px solid black;
-		flex-wrap: wrap;
-	}
-</style>
-
 <div class="jumbotron text-center">
   <h1>Todo lists</h1>
   <div class="d-flex justify-content-center">
@@ -67,9 +59,9 @@
   </div>
 </div>
 
-<ul class='lists'>
+<div class="card-columns">
 	{#each $lists as list, i}
 		<TodoList {...list} listId={i} updateList={lists.updateList}></TodoList>
 	{/each}	
-</ul>
+</div>
 
