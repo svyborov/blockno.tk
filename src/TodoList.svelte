@@ -29,28 +29,28 @@
 </div>
 
 <script>
-	import { remove } from './utils';
-	let inputValue = '';
-	
-	const addItem = () => {
-		updateList(listId, { items: [...items, inputValue] });
-		inputValue = '';
-	};
+  import { remove } from './utils';
+  let inputValue = '';
+  
+  const addItem = () => {
+    updateList(listId, { items: [...items, inputValue] });
+    inputValue = '';
+  };
 
-	const removeItem = (i) => {
-		remove(items, i);
-		updateList(listId, { items });
-	};
+  const removeItem = (i) => {
+    remove(items, i);
+    updateList(listId, { items });
+  };
 
-	const editItem = (i, item) => {
-	  items[i] = item;
-	  updateList(listId, { items });
-	};
-	
-	export let name = '';
-	export let items = [];
-	export let listId = 0;
-	export let updateList;
+  const editItem = (i, item) => {
+    items[i] = item;
+    updateList(listId, { items });
+  };
+  
+  export let name = '';
+  export let items = [];
+  export let listId = 0;
+  export let updateList;
 </script>
 
 <style>
