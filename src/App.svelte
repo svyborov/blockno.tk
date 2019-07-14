@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { writable, get } from 'svelte/store';
   import TodoList from './TodoList.svelte';
-	import { remove } from './utils';
+  import { remove } from './utils';
   
   const ls = {
     saveLists: lists => localStorage.setItem('lists', JSON.stringify(lists)),
@@ -66,14 +66,14 @@
 </div>
 
 <style lang="text/sass">
-	@import "~bootstrap/scss/bootstrap";
+  @import "~bootstrap/scss/bootstrap";
 
-	.card-columns {
-		@include media-breakpoint-only(lg) {
-			column-count: 4;
-		}
-		@include media-breakpoint-only(xl) {
-			column-count: 5;
-		}
-	}
+  .card-columns {
+    @include media-breakpoint-only(lg) {
+      column-count: 4;
+    }
+    @include media-breakpoint-only(xl) {
+      column-count: 5;
+    }
+  }
 </style>
