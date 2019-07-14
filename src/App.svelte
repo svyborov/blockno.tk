@@ -67,4 +67,13 @@
 
 <style lang="text/sass">
 	@import "~bootstrap/scss/bootstrap";
+
+	.card-columns {
+		@include media-breakpoint-only(lg) {
+			column-count: 4;
+		}
+		@include media-breakpoint-only(xl) {
+			column-count: 5;
+		}
+	}
 </style>
