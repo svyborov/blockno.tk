@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { writable, get } from 'svelte/store';
   import TodoList from './TodoList.svelte';
-  import { remove } from './utils'
+	import { remove } from './utils';
   
   const ls = {
     saveLists: lists => localStorage.setItem('lists', JSON.stringify(lists)),
@@ -65,3 +65,6 @@
   {/each}  
 </div>
 
+<style lang="text/sass">
+	@import "~bootstrap/scss/bootstrap";
+</style>
