@@ -1,57 +1,69 @@
 <div class="card">
   <div class="card-header">
+  {#if titleEdited}
+    <input type="text" class="form-control border-0 m-0" aria-label="Text input with checkbox" bind:value={name} on:blur="{titleToInput}">
+  {:else}
     {name}
-  </div>
-  <div class="card-body p-0">
-    <form on:submit|preventDefault={addItem}>
-      <input type="text" class="form-control border-0 m-0" aria-label="Text input with checkbox" bind:value={inputValue}>
-    </form>
+    <button type="button" class="btn btn-primary" on:click={titleToInput}>Edit</button>
+  {/if}
+</div>
+<div class="card-body p-0">
+  <form on:submit|preventDefault={addItem}>
+  <input type="text" class="form-control border-0 m-0" aria-label="Text input with checkbox" bind:value={inputValue}>
+  </form>
   </div>
   <ul class="list-group list-group-flush">
-    {#each items as item, i}
-      <li class="list-group-item p-0 rounded-0">
-        <div class="input-group m-0">
-          <div class="input-group-prepend">
-            <div class="input-group-text border-0">
-              <input type="checkbox" aria-label="Checkbox for following text input">
-            </div>
-          </div>
-          <input type="text" class="form-control border-0 m-0" aria-label="Text input with checkbox" bind:value={item} on:keydown={() => editItem(i, item)}>
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary border-0" type="button" id="button-addon2" on:click={() => removeItem(i)}>
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
-      </li>
-    {/each}
-  </ul>
+  {#each items as item, i}
+<li class="list-group-item p-0 rounded-0">
+  <div class="input-group m-0">
+  <div class="input-group-prepend">
+  <div class="input-group-text border-0">
+  <input type="checkbox" aria-label="Checkbox for following text input">
+  </div>
+  </div>
+  <input type="text" class="form-control border-0 m-0" aria-label="Text input with checkbox" bind:value={item} on:keydown={() => editItem(i, item)}>
+<div class="input-group-append">
+  <button class="btn btn-outline-secondary border-0" type="button" id="button-addon2" on:click={() => removeItem(i)}>
+<span aria-hidden="true">&times;</span>
+</button>
 </div>
+</div>
+</li>
+  {/each}
+  </ul>
+  </div>
 
-<script>
+  <script>
   import { remove } from './utils';
-  let inputValue = '';
-  
-  const addItem = () => {
-    updateList(listId, { items: [...items, inputValue] });
-    inputValue = '';
-  };
+    let inputValue = '';
 
-  const removeItem = (i) => {
-    remove(items, i);
-    updateList(listId, { items });
-  };
+    const addItem = () => {
+      updateList(listId, { items: [...items, inputValue] });
+      inputValue = '';
+    };
 
-  const editItem = (i, item) => {
-    items[i] = item;
-    updateList(listId, { items });
-  };
-  
-  export let name = '';
-  export let items = [];
-  export let listId = 0;
-  export let updateList;
-</script>
+    const removeItem = (i) => {
+      remove(items, i);
+      updateList(listId, { items });
+    };
 
-<style>
-</style>
+    const editItem = (i, item) => {
+      items[i] = item;
+      updateList(listId, { items });
+    };
+
+    const titleToInput = () => {
+      titleEdited = !titleEdited;
+      updateList(listId, { name });
+    };
+
+    export let name = '';
+    export let items = [];
+    export let listId = 0;
+    export let updateList;
+    export let updateListTitle;
+    export let titleEdited = false;
+  </script>
+
+  <style>
+  </style>

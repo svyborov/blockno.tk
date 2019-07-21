@@ -3,7 +3,7 @@
   import { writable, get } from 'svelte/store';
   import TodoList from './TodoList.svelte';
   import { remove } from './utils';
-  
+
   const ls = {
     saveLists: lists => localStorage.setItem('lists', JSON.stringify(lists)),
     getLists: () => {
@@ -13,17 +13,24 @@
       }
     }
   };
-    
+
   const createLists = () => {
     const { subscribe, update, set } = writable([]);
-    
+
     return {
       subscribe,
       addList: list => {
         update(lists => [...lists, list]);
         ls.saveLists(get(lists))
       },
-      updateList: (i, list) => { 
+      updateList: (i, list) => {
+        update(lists => {
+          lists[i] = {...lists[i], ...list};
+          return lists
+        });
+        ls.saveLists(get(lists))
+      },
+      updateListTitle: (i, list) => {
         update(lists => {
           lists[i] = {...lists[i], ...list};
           return lists
@@ -33,15 +40,15 @@
       setLists: lists => set(lists)
     }
   };
-  
+
   const lists = createLists();
-  
+
   let inputVal = '';
   const createList = () => {
     lists.addList({ name: inputVal, items: [] });
     inputVal = '';
   };
-  
+
   onMount(() => {
     const l = ls.getLists();
     if (l) {
@@ -61,8 +68,8 @@
 
 <div class="card-columns">
   {#each $lists as list, i}
-    <TodoList {...list} listId={i} updateList={lists.updateList}></TodoList>
-  {/each}  
+    <TodoList {...list} listId={i} updateList={lists.updateList} updateListTitle="{lists.updateListTitle}"></TodoList>
+  {/each}
 </div>
 
 <style lang="text/sass">
