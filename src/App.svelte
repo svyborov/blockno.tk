@@ -30,15 +30,8 @@
         });
         ls.saveLists(get(lists))
       },
-      updateListTitle: (i, list) => {
-        update(lists => {
-          lists[i] = {...lists[i], ...list};
-          return lists
-        });
-        ls.saveLists(get(lists))
-      },
       setLists: lists => set(lists)
-    }
+    };
   };
 
   const lists = createLists();
@@ -68,7 +61,7 @@
 
 <div class="card-columns">
   {#each $lists as list, i}
-    <TodoList {...list} listId={i} updateList={lists.updateList} updateListTitle="{lists.updateListTitle}"></TodoList>
+    <TodoList {...list} listId={i} updateList={lists.updateList}></TodoList>
   {/each}
 </div>
 
