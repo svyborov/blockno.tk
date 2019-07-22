@@ -11,7 +11,12 @@
       if (lists) {
         return JSON.parse(lists)
       }
-    }
+    },
+    removeList: (listId) => {
+        const lists = ls.getLists();
+        remove(lists, listId);
+        ls.saveLists(lists);
+    },
   };
 
   const createLists = () => {
@@ -24,13 +29,18 @@
         ls.saveLists(get(lists))
       },
       updateList: (i, list) => {
+        console.log(lists);
         update(lists => {
           lists[i] = {...lists[i], ...list};
+          console.log(lists);
           return lists
         });
         ls.saveLists(get(lists))
       },
-      setLists: lists => set(lists)
+      setLists: lists => set(lists),
+      removeList: (listId) => {
+        ls.removeList(listId);
+      }
     };
   };
 
@@ -38,7 +48,7 @@
 
   let inputVal = '';
   const createList = () => {
-    lists.addList({ name: inputVal, items: [] });
+    lists.addList({ name: inputVal, items: [], inTrash: false, inTrashFrom: null });
     inputVal = '';
   };
 

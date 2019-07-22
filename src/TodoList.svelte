@@ -6,6 +6,7 @@
       {name}
       <button type="button" class="btn btn-primary" on:click={toggleTitleEditing}>Edit</button>
     {/if}
+    <button type="button" class="btn btn-danger" on:click={moveListToTrash}>Delete</button>
   </div>
   <div class="card-body p-0">
     <form on:submit|preventDefault={addItem}>
@@ -55,6 +56,10 @@
     const updateTitle = () => {
       toggleTitleEditing();
       updateList(listId, { name: titleInputValue });
+    };
+
+    const moveListToTrash = () => {
+      updateList(listId, { inTrash: true, inTrashFrom: Date.now() });
     };
 
     const toggleTitleEditing = () => {
