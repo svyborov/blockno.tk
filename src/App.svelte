@@ -2,9 +2,10 @@
   import { onMount } from 'svelte';
   import { writable, get } from 'svelte/store';
   import TodoList from './TodoList.svelte';
+  import Trash from './Trash.svelte';
   import { remove } from './utils';
 
-
+  let trash = false;
   const removeAllOutdatedInTrash = () => {
     const sevenDaysDelay = 7 * 24 * 60 * 60 * 1000;
     const lists = ls.getLists();
@@ -32,7 +33,7 @@
 
   const createLists = () => {
     const { subscribe, update, set } = writable([]);
-    setInterval(removeAllOutdatedInTrash, 10000);
+    setInterval(removeAllOutdatedInTrash, 60 * 60 * 1000);
     return {
       subscribe,
       addList: list => {
@@ -78,12 +79,17 @@
       <input class="form-control form-control-lg" bind:value={inputVal} placeholder="list name">
     </form>
   </div>
+  <button type="button" class="btn btn-danger" on:click={() => trash = !trash}>В корзину</button>
 </div>
 
 <div class="card-columns">
-  {#each $lists as list, i}
-    <TodoList {...list} listId={i} updateList={lists.updateList}></TodoList>
-  {/each}
+    {#each $lists as list, i}
+      {#if !trash && !list.inTrash}
+        <TodoList {...list} listId={i} updateList={lists.updateList}></TodoList>
+      {:else if trash && list.inTrash}
+        <Trash {...list} listId={i} updateList={lists.updateList}></Trash>
+      {/if}
+    {/each}
 </div>
 
 <style lang="text/sass">
