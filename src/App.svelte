@@ -4,6 +4,17 @@
   import TodoList from './TodoList.svelte';
   import { remove } from './utils';
 
+
+  const removeAllOutdatedInTrash = () => {
+    const sevenDaysDelay = 7 * 24 * 60 * 60 * 1000;
+    const lists = ls.getLists();
+    lists.forEach((list, index) => {
+      if (list.inTrash && ((Date.now() - list.inTrashFrom) > sevenDaysDelay)) {
+        remove(lists, index);
+      }
+    });
+    ls.saveLists(lists);
+  };
   const ls = {
     saveLists: lists => localStorage.setItem('lists', JSON.stringify(lists)),
     getLists: () => {
@@ -21,7 +32,7 @@
 
   const createLists = () => {
     const { subscribe, update, set } = writable([]);
-
+    setInterval(removeAllOutdatedInTrash, 10000);
     return {
       subscribe,
       addList: list => {
