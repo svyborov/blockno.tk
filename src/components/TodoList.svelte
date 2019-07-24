@@ -35,7 +35,8 @@
  </div>
 
   <script>
-    import { remove } from './utils';
+  import { remove } from '../utils';
+  
     let inputValue = '';
 
     const addItem = () => {
@@ -44,8 +45,8 @@
     };
 
     const removeItem = (i) => {
-      remove(items, i);
-      updateList(listId, { items });
+      const newItems = remove(items, i);
+      updateList(listId, { items: newItems });
     };
 
     const editItem = (i, item) => {

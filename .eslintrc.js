@@ -17,5 +17,8 @@ module.exports = {
       processor: 'svelte3/svelte3'
     }
   ],
-  extends: "airbnb-base"
+  extends: "airbnb-base",
+  rules: {
+    "import/no-extraneous-dependencies": "off"
+  }
 };

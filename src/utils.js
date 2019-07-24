@@ -1,5 +1,1 @@
-export const remove = (array, index) => {
-  if (index !== -1) {
-    return array.splice(index, 1)[0];
-  }
-};
+export const remove = (array, index) => array.filter((_el, i) => i !== index);
