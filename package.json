@@ -1,7 +1,16 @@
 {
   "name": "onlytodo",
   "version": "1.0.0",
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/lib/"
+    ]
+  },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-jest": "^24.8.0",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "eslint": "^6.0.1",
