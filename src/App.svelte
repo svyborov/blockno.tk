@@ -23,7 +23,9 @@
     allLists = value;
   });
 
-  $: listsToView = allLists.map((element, id) => ({id, ...element})).filter(l => l.inTrash === trashView);
+  $: listsToView = allLists
+          .map((element, id) => ({id, ...element})) // добавляем id в объект, т.к. при filter они теряются
+          .filter(l => l.inTrash === trashView);
 
   onMount(() => {
     removeInterval = setInterval(removeAllOutdatedInTrash, 60 * 60 * 1000);

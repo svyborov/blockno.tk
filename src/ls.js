@@ -4,4 +4,4 @@ export default {
     const lists = localStorage.getItem('lists');
     return lists ? JSON.parse(lists) : [];
   },
-}
+};
