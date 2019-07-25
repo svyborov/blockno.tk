@@ -6,5 +6,5 @@ export default () => {
   return {
     subscribe,
     toggleTrash: () => update(({ trash }) => ({ trash: !trash })),
-  }
+  };
 };

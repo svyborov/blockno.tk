@@ -4,28 +4,27 @@ import ls from '../ls';
 
 export default () => {
   const { subscribe, update, set } = writable([]);
-  console.log(ls)
   return {
     subscribe,
     addList: (list) => {
-      update(lists => {
+      update((lists) => {
         const newLists = [...lists, list];
-        ls.setLists(newLists);
+        ls.saveLists(newLists);
         return newLists;
       });
     },
-    updateList: (listId, list) => { 
-      update(lists => { 
+    updateList: (listId, list) => {
+      update((lists) => {
         const newLists = lists.map((el, i) => (listId === i ? { ...el, ...list } : el));
-        ls.setLists(newLists);
+        ls.saveLists(newLists);
         return newLists;
       });
     },
     setLists: lists => set(lists),
     removeList: (listId) => {
-      update(lists => {
+      update((lists) => {
         const newLists = remove(lists, listId);
-        ls.setLists(newLists);
+        ls.saveLists(newLists);
         return newLists;
       });
     },

@@ -5,20 +5,23 @@
   import ListsView from './components/ListsView';
   import { createLists, createViewerState } from './storages';
   import ls from './ls';
-  
+
   const lists = createLists();
   const viewerState = createViewerState();
-  
+
   let trashView = false;
   let listsToView = [];
+  let allLists = [];
 
   const unsubscr2 = viewerState.subscribe(({ trash }) => {
-    trashView = trash
+    trashView = trash;
   });
 
   const unsubscr = lists.subscribe(value => {
-    listsToView = value.filter(l => l.inTrash === trashView)
+    allLists = value;
   });
+
+  $: listsToView = allLists.reduce((acc, element, id) => ([...acc, {id, ...element}]), []).filter(l => l.inTrash === trashView);
 
   onMount(() => {
     const l = ls.getLists();

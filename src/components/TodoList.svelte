@@ -36,31 +36,31 @@
 
   <script>
   import { remove } from '../utils';
-  
+
     let inputValue = '';
 
     const addItem = () => {
-      updateList(listId, { items: [...items, inputValue] });
+      updateList(id, { items: [...items, inputValue] });
       inputValue = '';
     };
 
     const removeItem = (i) => {
       const newItems = remove(items, i);
-      updateList(listId, { items: newItems });
+      updateList(id, { items: newItems });
     };
 
     const editItem = (i, item) => {
       items[i] = item;
-      updateList(listId, { items });
+      updateList(id, { items });
     };
 
     const updateTitle = () => {
       toggleTitleEditing();
-      updateList(listId, { name: titleInputValue });
+        updateList(id, { name: titleInputValue });
     };
 
     const moveListToTrash = () => {
-      updateList(listId, { inTrash: true, inTrashFrom: Date.now() });
+      updateList(id, { inTrash: true, inTrashFrom: Date.now() });
     };
 
     const toggleTitleEditing = () => {
@@ -70,7 +70,7 @@
     export let name = '';
     export let titleInputValue = name;
     export let items = [];
-    export let listId = 0;
+    export let id = 0;
     export let updateList;
     export let titleEditing = false;
   </script>
